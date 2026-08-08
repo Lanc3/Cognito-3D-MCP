@@ -1,7 +1,11 @@
+<p align="center">
+  <img src="assets/branding/cognito-3d-mcp-brand.png" alt="Cognito-3D-MCP" width="720">
+</p>
+
 [中文阅读](README_zh_cn.md)
 [日本語で読む](README_ja_jp.md)
 
-# Hunyuan3D multi-backend MCP
+# Cognito-3D-MCP
 
 This community fork adds a local Model Context Protocol (MCP) server for three
 image-to-3D backends. **Hunyuan3D-2mv is the preferred and default model**;

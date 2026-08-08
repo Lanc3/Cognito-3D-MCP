@@ -1,0 +1,6 @@
+file,line,method,path,framework
+api_server.py,244,POST,/generate,express-like
+api_server.py,244,,post,fastapi-like
+api_server.py,277,POST,/send,express-like
+api_server.py,287,GET,/status/{uid},express-like
+api_server.py,287,,get,fastapi-like

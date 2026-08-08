@@ -1,0 +1,5 @@
+flowchart LR
+  UI[UI/routes/screens] --> API[API/services]
+  API --> Data[Data model]
+  API --> External[External integrations]
+  Data --> State[Persistent state]

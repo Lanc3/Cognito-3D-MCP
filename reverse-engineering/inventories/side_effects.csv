@@ -1,0 +1,55 @@
+file,line,side_effect,evidence
+README.md,75,database-write,"The shape generative model, built on a scalable flow-based diffusion transformer, aims to create geometry that properly"
+README.md,202,database-write,"The output mesh is a [trimesh object](https://trimesh.org/trimesh.html), which you could save to glb/obj (or other"
+api_server.py,222,database-write,"with tempfile.NamedTemporaryFile(suffix=f'.{type}', delete=False) as temp_file:"
+assets/modelviewer-textured-template.html,103,database-write,appearanceButton.classList.remove('checked');
+assets/modelviewer-textured-template.html,123,database-write,geometryButton.classList.remove('checked');
+blender_addon.py,146,database-write,"temp_glb_file = tempfile.NamedTemporaryFile(delete=False, suffix="".glb"")"
+blender_addon.py,196,network-call,response = requests.post(
+blender_addon.py,209,network-call,response = requests.post(
+blender_addon.py,232,network-call,response = requests.post(
+blender_addon.py,244,network-call,response = requests.post(
+blender_addon.py,264,database-write,"temp_file = tempfile.NamedTemporaryFile(delete=False, suffix="".glb"")"
+docs/source/conf.py,16,database-write,"sys.path.insert(0, os.path.abspath("".""))"
+docs/source/conf.py,17,database-write,"sys.path.insert(0, os.path.abspath(""../../""))"
+docs/source/started/code.md,16,database-write,"The output mesh is a [trimesh object](https://trimesh.org/trimesh.html), which you could save to glb/obj (or other"
+gradio_app.py,117,file-write,"with open(output_html_path, 'w', encoding='utf-8') as f:"
+gradio_app.py,203,database-write,time_meta['remove background'] = time.time() - start_time
+gradio_app.py,208,database-write,time_meta['remove background'] = time.time() - start_time
+gradio_app.py,299,database-write,"gr.update(value=path),"
+gradio_app.py,300,database-write,"gr.update(value=path_textured),"
+gradio_app.py,346,database-write,"gr.update(value=path),"
+gradio_app.py,440,database-write,"check_box_rembg = gr.Checkbox(value=True, label='Remove Background', min_width=100)"
+gradio_app.py,521,database-write,"tab_ip.select(fn=lambda: gr.update(selected='tab_img_gallery'), outputs=gallery)"
+gradio_app.py,523,database-write,"tab_tp.select(fn=lambda: gr.update(selected='tab_txt_gallery'), outputs=gallery)"
+gradio_app.py,544,database-write,"lambda: (gr.update(visible=False, value=False), gr.update(interactive=True), gr.update(interactive=True),"
+gradio_app.py,545,database-write,"gr.update(interactive=False)),"
+gradio_app.py,548,database-write,"lambda: gr.update(selected='gen_mesh_panel'),"
+gradio_app.py,571,database-write,"lambda: (gr.update(visible=True, value=True), gr.update(interactive=False), gr.update(interactive=True),"
+gradio_app.py,572,database-write,"gr.update(interactive=False)),"
+gradio_app.py,575,database-write,"lambda: gr.update(selected='gen_mesh_panel'),"
+gradio_app.py,581,database-write,return gr.update(value=5)
+gradio_app.py,583,database-write,return gr.update(value=10)
+gradio_app.py,585,database-write,return gr.update(value=30)
+gradio_app.py,591,database-write,return gr.update(value=196)
+gradio_app.py,593,database-write,return gr.update(value=256)
+gradio_app.py,595,database-write,return gr.update(value=384)
+gradio_app.py,630,database-write,"return model_viewer_html, gr.update(value=path, interactive=True)"
+gradio_app.py,633,database-write,"lambda: gr.update(selected='export_mesh_panel'),"
+hy3dgen/rembg.py,16,database-write,"from rembg import remove, new_session"
+hy3dgen/rembg.py,24,database-write,"output = remove(image, session=self.session, bgcolor=[255, 255, 255, 0])"
+hy3dgen/shapegen/models/autoencoders/attention_blocks.py,255,database-write,"logger.info('Save kv cache,this should be called only once for one mesh')"
+hy3dgen/shapegen/models/autoencoders/model.py,109,database-write,model_kwargs.update(kwargs)
+hy3dgen/shapegen/models/denoisers/hunyuan3ddit.py,41,database-write,Create sinusoidal timestep embeddings.
+hy3dgen/shapegen/pipelines.py,130,database-write,kwargs.update(params)
+hy3dgen/shapegen/pipelines.py,194,database-write,model_kwargs.update(kwargs)
+hy3dgen/shapegen/pipelines.py,418,database-write,hook.remove()
+hy3dgen/shapegen/postprocessors.py,63,database-write,"with tempfile.NamedTemporaryFile(suffix='.ply', delete=False) as temp_file:"
+hy3dgen/shapegen/postprocessors.py,77,database-write,"with tempfile.NamedTemporaryFile(suffix='.ply', delete=False) as temp_file:"
+hy3dgen/shapegen/postprocessors.py,151,database-write,"with tempfile.NamedTemporaryFile(suffix='.ply', delete=False) as temp_file:"
+hy3dgen/shapegen/postprocessors.py,191,database-write,"with tempfile.NamedTemporaryFile(suffix='.obj', delete=False) as temp_input:"
+hy3dgen/shapegen/postprocessors.py,192,database-write,"with tempfile.NamedTemporaryFile(suffix='.obj', delete=False) as temp_output:"
+hy3dgen/shapegen/postprocessors.py,194,process,os.system(f'{self.executable} {temp_input.name} {temp_output.name}')
+hy3dgen/texgen/custom_rasterizer/lib/custom_rasterizer_kernel/grid_neighbor.cpp,255,database-write,visited_seq.insert(seq);
+hy3dgen/texgen/hunyuanpaint/pipeline.py,169,database-write,Update target parameters to be closer to those of source parameters using
+hy3dgen/texgen/hunyuanpaint/pipeline.py,695,database-write,progress_bar.update()

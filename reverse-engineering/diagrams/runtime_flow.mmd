@@ -1,0 +1,10 @@
+flowchart LR
+  A["1-4 canonical images"] --> B["MVImageProcessorV2: 512px"]
+  B --> C["Frozen DINOv2-Giant: V x 1370 x 1536"]
+  C --> D["Add canonical view embeddings"]
+  N["Gaussian noise: 3072 x 64"] --> E["Hunyuan3DDiT: flow velocity"]
+  D --> E
+  E --> F["Euler integration: t=0 to t=1"]
+  F --> G["ShapeVAE geometry decoder"]
+  G --> H["Surface extraction"]
+  H --> I["trimesh / GLB"]

@@ -10,10 +10,10 @@ from mcp.server.fastmcp import FastMCP
 from .backends import BackendRegistry, GenerationRequest, backend_status
 
 mcp = FastMCP(
-    "Hunyuan3D multi-backend",
+    "Cognito-3D-MCP",
     instructions=(
-        "Generate GLB assets from local images. Hunyuan3D-2mv is preferred and supports "
-        "up to four canonical views; SF3D and SPAR3D are optional single-image fallbacks."
+        "Generate local GLB assets from one or more reference images. The default engine "
+        "supports up to four canonical views; optional engines accept a single image."
     ),
 )
 registry = BackendRegistry()
@@ -21,7 +21,7 @@ registry = BackendRegistry()
 
 @mcp.tool()
 def list_3d_backends() -> list[dict[str, object]]:
-    """List the three model backends, their availability, and the preferred backend."""
+    """List the generation engines, their availability, and the default engine."""
 
     return backend_status(registry.settings)
 
@@ -42,8 +42,8 @@ def generate_3d(
 ) -> dict[str, object]:
     """Generate a GLB from one or more local images.
 
-    Omit ``backend`` to use the preferred Hunyuan3D-2mv model. Only Hunyuan
-    accepts the optional left, back, and right canonical views.
+    Omit ``backend`` to use the default multiview engine. Only the ``hunyuan3d``
+    engine accepts the optional left, back, and right canonical views.
     """
 
     result = registry.generate(
@@ -72,4 +72,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

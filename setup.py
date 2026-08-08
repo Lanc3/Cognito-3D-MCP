@@ -17,11 +17,11 @@ from setuptools import find_packages, setup
 setup(
     name="hy3dgen",
     version="2.0.2+mcp.1",
-    description="Hunyuan3D generation with a Hunyuan-first multi-backend MCP server",
-    url="https://github.com/Lanc3/Hunyuan3D-MCP",
+    description="Cognito-3D-MCP: local multi-backend image-to-3D generation for MCP clients",
+    url="https://github.com/Lanc3/Cognito-3D-MCP",
     project_urls={
         "Upstream": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2",
-        "Issues": "https://github.com/Lanc3/Hunyuan3D-MCP/issues",
+        "Issues": "https://github.com/Lanc3/Cognito-3D-MCP/issues",
     },
     license_files=("LICENSE", "NOTICE"),
     packages=find_packages(),
@@ -33,7 +33,10 @@ setup(
         "test": [],
     },
     entry_points={
-        "console_scripts": ["hunyuan3d-mcp=hy3dgen_mcp.server:main"],
+        "console_scripts": [
+            "cognito-3d-mcp=hy3dgen_mcp.server:main",
+            "hunyuan3d-mcp=hy3dgen_mcp.server:main",
+        ],
     },
     install_requires=[
         'gradio',

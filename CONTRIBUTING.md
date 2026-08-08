@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for improving this Hunyuan3D integration.
+Thank you for improving Cognito-3D-MCP.
 
 1. Fork the repository and create a focused branch.
 2. Do not commit model weights, generated meshes, credentials, or local paths.

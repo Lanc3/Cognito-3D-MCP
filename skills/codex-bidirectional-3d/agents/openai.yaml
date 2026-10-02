@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cognito-3D-mcp Bidirectional 3D"
+  short_description: "Create production GLBs from matched front and back views"
+  default_prompt: "Use $codex-bidirectional-3d to create a production 3D asset from matched front and back reference images."

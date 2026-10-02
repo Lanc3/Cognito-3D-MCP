@@ -1,26 +1,48 @@
-name: CI
-
+name: Integration checks
 on:
   push:
+    branches: [master]
   pull_request:
-
 permissions:
   contents: read
-
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  unit-tests:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.11', '3.12']
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
-      - run: python -m pip install "mcp>=1.28,<2"
-      - run: python -m unittest discover -s tests -v
-      - run: >-
-          python -c "import anyio; from hy3dgen_mcp.server import mcp;
-          names = {tool.name for tool in anyio.run(mcp.list_tools)};
-          assert names == {'generate_3d', 'list_3d_backends'}, names"
+          python-version: ${{ matrix.python }}
+      - name: Install Linux mesh library runtime dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libopengl0 libegl1 libgl1 libxkbcommon0
+      - run: python -m pip install -e . -r requirements-dev.txt build
+      - run: python -m ruff check --select E9,F src tests scripts
+      - run: python -m pytest -q
+      - run: python scripts/verify-release.py
+      - run: python scripts/smoke-mcp.py
+      - run: python -m build
+      - name: Verify wheel contents
+        run: python scripts/verify-release.py --wheel-dir dist
+      - name: Parse installer and preview plan
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Get-ChildItem -Recurse -Filter *.ps1 | Where-Object { $_.FullName -notmatch '\\.venv\\' } | ForEach-Object {
+            $parseTokens = $null
+            $parseErrors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$parseTokens, [ref]$parseErrors) | Out-Null
+            if ($parseErrors) { throw ($parseErrors | Out-String) }
+          }
+          ./install.ps1 -DryRun
+          ./tests/install-helpers.ps1

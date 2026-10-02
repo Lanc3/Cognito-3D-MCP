@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#181818">
+  <meta name="description" content="Your local Cognito-3D-mcp asset workspace. Follow generation, review models, and download finished assets.">
+  <meta name="queue-session-token" content="__QUEUE_SESSION_TOKEN__">
+  <title>Cognito-3D-mcp · Asset queue</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/viewer.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to workspace</a>
+  <svg class="icon-definitions" aria-hidden="true">
+    <symbol id="icon-cube" viewBox="0 0 24 24"><path d="m12 3 9 5v8l-9 5-9-5V8l9-5Z M3 8l9 5 9-5 M12 13v8 M7.5 5.5l9 5"/></symbol>
+    <symbol id="icon-sidebar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></symbol>
+    <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z M3 11h18"/></symbol>
+    <symbol id="icon-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8 M12 17v4"/></symbol>
+    <symbol id="icon-pause" viewBox="0 0 24 24"><path d="M8 5v14 M16 5v14"/></symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8V4Z"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12 M18 6 6 18"/></symbol>
+    <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></symbol>
+    <symbol id="icon-list" viewBox="0 0 24 24"><path d="M9 6h11 M9 12h11 M9 18h11 M4 6h.01 M4 12h.01 M4 18h.01"/></symbol>
+    <symbol id="icon-review" viewBox="0 0 24 24"><path d="M9 5h11 M9 12h11 M9 19h11 M3 5l1 1 2-3 M3 12l1 1 2-3 M3 19l1 1 2-3"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M12 3v12 m-5-5 5 5 5-5 M4 16v4h16v-4"/></symbol>
+    <symbol id="icon-reset" viewBox="0 0 24 24"><path d="M3 10a9 9 0 1 1 2 8 M3 4v6h6"/></symbol>
+  </svg>
+  <div class="shell">
+    <aside id="sidebar" class="sidebar" aria-label="Workspace navigation">
+      <button id="sidebar-close" class="icon-button sidebar-close" type="button" aria-label="Close navigation" title="Close navigation"><svg class="ui-icon" aria-hidden="true"><use href="#icon-close"/></svg></button>
+      <a class="brand" href="/" aria-label="Cognito-3D-mcp queue home"><svg class="brand-mark ui-icon" aria-hidden="true"><use href="#icon-cube"/></svg><span>Cognito-3D-mcp<span class="brand-caption">Asset studio</span></span></a>
+      <div class="sidebar-section-label"><svg class="ui-icon" aria-hidden="true"><use href="#icon-folder"/></svg><span>Workspace</span></div>
+      <div class="sidebar-heading"><span>Batches</span><span id="batch-total" class="count">0</span></div>
+      <nav id="batches" aria-label="Batches"></nav>
+      <div class="sidebar-footer"><svg class="ui-icon" aria-hidden="true"><use href="#icon-monitor"/></svg><span>Local workspace<small>Runs on your computer</small></span><span class="local-dot" title="Local processing"></span></div>
+    </aside>
+    <button id="sidebar-backdrop" class="sidebar-backdrop" type="button" aria-label="Close navigation" hidden tabindex="-1"></button>
+    <main id="main-content" tabindex="-1">
+      <header class="topbar">
+        <div class="topbar-start"><button id="sidebar-toggle" class="icon-button sidebar-toggle" type="button" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false" title="Toggle navigation"><svg class="ui-icon" aria-hidden="true"><use href="#icon-sidebar"/></svg></button><div class="breadcrumb"><svg class="ui-icon" aria-hidden="true"><use href="#icon-folder"/></svg><span class="breadcrumb-parent">Workspace</span><span class="breadcrumb-divider">/</span><strong>Asset queue</strong></div></div>
+        <div id="connection" class="connection" role="status"><span class="status-dot"></span><span id="connection-text">Connecting…</span></div>
+      </header>
+      <div class="content">
+        <div id="notice" class="notice" role="alert" hidden><span id="notice-message"></span><button id="retry" class="button secondary" type="button">Try again</button></div>
+        <section id="loading" class="loading-state" role="status"><span class="loading-spinner" aria-hidden="true"></span><h1>Opening your workspace</h1><p>Connecting to the local asset queue…</p></section>
+        <section id="empty" class="empty-state" hidden><span class="empty-symbol"><svg class="ui-icon" aria-hidden="true"><use href="#icon-cube"/></svg></span><p class="eyebrow">Your local asset studio</p><h1>What will you create?</h1><p>Ask your agent to start a batch. Follow each asset from its first references to the finished model, all in one place.</p><div class="empty-flow">References <span>→</span> Shape <span>→</span> Remesh <span>→</span> Paint <span>→</span> Finish</div></section>
+        <div id="workspace" hidden>
+          <section class="page-heading"><div class="heading-copy"><p class="eyebrow">Asset queue</p><h1 id="batch-name">Asset batch</h1><p id="batch-subtitle" class="subtitle"></p></div><div class="heading-actions"><span id="batch-status" class="badge"></span><button id="pause" class="button secondary" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#icon-pause"/></svg>Pause queue</button><button id="resume" class="button primary" type="button" hidden><svg class="ui-icon" aria-hidden="true"><use href="#icon-play"/></svg>Resume queue</button><button id="cancel" class="button danger" type="button">Cancel</button></div></section>
+          <section class="summary" aria-label="Batch overview"><div class="stat"><span class="stat-label">Assets in batch</span><strong id="asset-count">0</strong><small id="asset-caption">From reference to export</small></div><div class="stat"><span class="stat-label">Finished</span><strong id="finished-count">0</strong><small>Accepted final exports</small></div><div class="stat"><span class="stat-label">Needs attention</span><strong id="attention-count">0</strong><small id="attention-caption">Agent checks and repairs</small></div><div class="stat worker-stat"><span class="stat-label">Active worker</span><strong id="active-resource">Idle</strong><small id="active-asset">Waiting for queued work</small></div></section>
+          <section class="pipeline-panel" aria-label="Production stages"><div class="panel-heading"><h2>Production stages</h2><span class="quiet-label">Each phase is reviewed before moving on</span></div><ol id="stages" class="stages"></ol><div id="gate" class="gate"><svg class="gate-icon ui-icon" aria-hidden="true"><use href="#icon-review"/></svg><div><strong id="gate-title">Agent review controls the next phase</strong><p id="gate-description">Every asset clears this phase before the batch moves forward.</p></div></div></section>
+          <section class="assets-section" aria-label="Assets"><div class="asset-toolbar"><div><h2>Assets <span id="asset-list-count" class="inline-count">0</span></h2><p id="asset-list-description">Open an asset to inspect its progress and evidence.</p></div><div class="toolbar-controls"><label class="filter-label" for="asset-filter">Show</label><select id="asset-filter"><option value="all">All assets</option><option value="attention">Needs attention</option><option value="finished">Finished</option></select><div class="view-switch" role="group" aria-label="Asset layout"><button id="grid-view" type="button" aria-label="Grid view" aria-pressed="true" title="Grid view"><svg class="ui-icon" aria-hidden="true"><use href="#icon-grid"/></svg></button><button id="list-view" type="button" aria-label="List view" aria-pressed="false" title="List view"><svg class="ui-icon" aria-hidden="true"><use href="#icon-list"/></svg></button></div></div></div><div id="assets" class="asset-grid"></div><p id="filtered-empty" class="filtered-empty" role="status" hidden>No assets match this filter.</p></section>
+          <footer class="page-footer"><span id="updated-at"></span><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-monitor"/></svg>Local files · No cloud upload</span></footer>
+        </div>
+      </div>
+    </main>
+  </div>
+  <dialog id="model-dialog" class="model-dialog" aria-labelledby="model-title">
+    <div class="model-heading"><div><p class="eyebrow">Model inspector</p><h2 id="model-title">Asset</h2></div><button id="model-close" type="button" class="icon-button" aria-label="Close 3D viewer" title="Close (Esc)"><svg class="ui-icon" aria-hidden="true"><use href="#icon-close"/></svg></button></div>
+    <div class="model-toolbar"><label for="model-select">Model / LOD</label><select id="model-select"></select><span id="model-texture-state" class="badge"></span><button id="model-reset" class="button secondary" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#icon-reset"/></svg>Reset view</button><a id="model-download" class="button secondary" download><svg class="ui-icon" aria-hidden="true"><use href="#icon-download"/></svg>Download GLB</a></div>
+    <div class="model-layout">
+      <div id="model-viewport" class="model-viewport" aria-label="Interactive model. Drag to rotate, wheel to zoom, right-drag to pan."><div id="model-message" class="model-message" role="status" aria-live="polite">Loading model…</div><div class="model-viewport-label"><svg class="ui-icon" aria-hidden="true"><use href="#icon-cube"/></svg>Local 3D view</div><div class="model-help">Drag to rotate <span>·</span> Scroll to zoom <span>·</span> Right-drag to pan</div></div>
+      <aside class="model-info"><p class="eyebrow">Mesh details</p><h3 id="model-profile-name"></h3><dl><div><dt>Actual quads</dt><dd id="model-quads">—</dd></div><div><dt>Target quads</dt><dd id="model-target">—</dd></div><div><dt>GLB triangles</dt><dd id="model-triangles">—</dd></div></dl><p id="model-topology-note" class="model-note"></p><p id="model-stage-note" class="model-note"></p><label class="model-check"><input id="model-wireframe" type="checkbox"> Triangle wireframe</label><p class="model-note">Textures stay on. The overlay shows the triangles in the exported model.</p><div class="model-resource-note">One model at a time.<br>Renders when the view changes.</div></aside>
+    </div>
+  </dialog>
+  <dialog id="preview-dialog" class="preview-dialog" aria-labelledby="preview-title" aria-describedby="preview-description"><div class="dialog-heading"><h2 id="preview-title">Model preview</h2><button id="preview-close" type="button" class="icon-button" aria-label="Close preview" title="Close (Esc)"><svg class="ui-icon" aria-hidden="true"><use href="#icon-close"/></svg></button></div><p id="preview-message" class="preview-message" role="status" hidden></p><img id="preview-image" alt=""><p id="preview-description">Review image. Choose “View in 3D” on the asset to rotate the model and compare its LODs.</p></dialog>
+  <dialog id="cancel-dialog" class="cancel-dialog" aria-labelledby="cancel-title" aria-describedby="cancel-description"><p class="eyebrow">Cancel batch</p><h2 id="cancel-title">Stop this batch?</h2><p id="cancel-description">Queued work will stop. Existing artifacts remain available for inspection.</p><div class="dialog-actions"><button id="cancel-back" type="button" class="button secondary" autofocus>Keep working</button><button id="cancel-confirm" type="button" class="button danger">Cancel batch</button></div></dialog>
+</body>
+</html>

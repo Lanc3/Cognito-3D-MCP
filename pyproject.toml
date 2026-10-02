@@ -1,11 +1,73 @@
 [build-system]
-requires = ["setuptools>=69", "wheel"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "cognito-3d-mcp"
+version = "0.4.0"
+description = "Cognito-3D-mcp: local MCP servers for multiview and single-image 3D asset generation"
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: Microsoft :: Windows",
+]
+dependencies = [
+  "mcp>=1.9,<2",
+  "Pillow>=10.0",
+  "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.6",
+  "huggingface-hub>=0.26,<2",
+  "numpy>=1.26,<3",
+  "build>=1.2",
+  "scipy>=1.13,<2",
+  "trimesh>=4.4,<6",
+  "pymeshlab==2025.7.post1",
+  "manifold3d>=3.3,<4",
+  "rtree>=1.3,<2",
+]
+repair = [
+  "numpy>=1.26,<3",
+  "scipy>=1.13,<2",
+  "trimesh>=4.4,<6",
+  "pymeshlab==2025.7.post1",
+  "manifold3d>=3.3,<4",
+  "rtree>=1.3,<2",
+]
+trellis = [
+  "transformers>=4.53,<6",
+  "safetensors>=0.5",
+]
+
+[project.scripts]
+cognito-3d-mcp = "codex_3d_mcp.hunyuan_mv.server:main"
+codex-3d-mcp = "codex_3d_mcp.server:main"
+codex-3d-trellis-mcp = "codex_3d_mcp.trellis.server:main"
+codex-3d-hunyuan-mv-mcp = "codex_3d_mcp.hunyuan_mv.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"codex_3d_mcp.hunyuan_mv" = [
+  "web/*.html", "web/*.css", "web/*.js", "web/vendor/*.js", "web/vendor/*.txt",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
 [tool.ruff]
-target-version = "py310"
 line-length = 100
+target-version = "py310"
+extend-exclude = [".venv*", "outputs"]
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B"]
-
+select = ["E", "F", "I", "UP"]

@@ -35,14 +35,25 @@ class BatchStageProcessor:
     def preflight(self):
         runtime = self.runtime.preflight()
         remesh = self.remesher.preflight()
-        memory = _memory_status()
-        checkpoint = (
-            self.runtime._shape_snapshot() / self.settings.shape_subfolder / "model.fp16.ckpt"
-        )
-        loader_bytes = max(4096 * 1024**2, checkpoint.stat().st_size if checkpoint.is_file() else 0)
-        required = loader_bytes + 2048 * 1024**2
-        memory["required_before_shape_bytes"] = required
-        memory["ready"] = min(memory["available_physical"], memory["available_commit"]) >= required
+        if not remesh.get("platform_supported", True):
+            memory = {"ready": False, "error": remesh["error"]}
+        else:
+            try:
+                memory = _memory_status()
+            except Codex3DError as exc:
+                memory = {"ready": False, "error": {"code": exc.code, "message": exc.message}}
+        if "error" not in memory:
+            checkpoint = (
+                self.runtime._shape_snapshot() / self.settings.shape_subfolder / "model.fp16.ckpt"
+            )
+            loader_bytes = max(
+                4096 * 1024**2, checkpoint.stat().st_size if checkpoint.is_file() else 0
+            )
+            required = loader_bytes + 2048 * 1024**2
+            memory["required_before_shape_bytes"] = required
+            memory["ready"] = min(
+                memory["available_physical"], memory["available_commit"]
+            ) >= required
         return {
             "ready": runtime["ready_for_generation"] and remesh["ready"] and memory["ready"],
             "runtime": runtime,

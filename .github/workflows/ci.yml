@@ -1,9 +1,13 @@
 name: Integration checks
 on:
   push:
+    branches: [master]
   pull_request:
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   test:
     runs-on: ${{ matrix.os }}

@@ -277,9 +277,19 @@ class AutoRemesherRuntime:
 
     def preflight(self) -> dict[str, Any]:
         exe = Path(self.settings.autoremesher_exe)
-        verified = exe.is_file() and hashlib.sha256(exe.read_bytes()).hexdigest() == EXE_SHA256
+        supported = os.name == "nt"
+        verified = (
+            supported and exe.is_file()
+            and hashlib.sha256(exe.read_bytes()).hexdigest() == EXE_SHA256
+        )
         return {
-            "ready": os.name == "nt" and verified and self.settings.python_exe.is_file(),
+            "ready": supported and verified and self.settings.python_exe.is_file(),
+            "platform_supported": supported,
+            "supported_platforms": ["Windows"],
+            "error": None if supported else {
+                "code": "REMESH_PLATFORM",
+                "message": "This bounded AutoRemesher runtime requires Windows.",
+            },
             "executable": str(exe),
             "release": RELEASE,
             "source_commit": SOURCE_COMMIT,
@@ -417,7 +427,10 @@ class AutoRemesherRuntime:
         log_path: Path,
         cancel_event: Any = None,
     ) -> dict[str, Any]:
-        if not self.preflight()["ready"]:
+        status = self.preflight()
+        if not status["ready"]:
+            if status.get("error"):
+                raise Codex3DError(status["error"]["message"], code=status["error"]["code"])
             raise Codex3DError(
                 "AutoRemesher is unavailable. Run scripts/setup-autoremesher.ps1 "
                 "and configure CODEX_AUTOREMESHER_EXE.",

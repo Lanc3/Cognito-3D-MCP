@@ -7,7 +7,7 @@ reconciled its API with the shipped skills before publication.
 
 ## Verified locally
 
-- Full Windows CPU regression suite: 374 passed, 8 optional integration checks
+- Full Windows CPU regression suite: 375 passed, 8 optional integration checks
   skipped, including native CPU geometry fixtures.
 - Job cancellation isolation; queue saturation and shutdown ordering; database
   lifetime; stale worker output; shared GPU-lock ownership and unload failures.
@@ -31,6 +31,8 @@ reconciled its API with the shipped skills before publication.
 - Real STDIO initialization, tool discovery and `server_status` for all three
   servers, from source and a wheel installed into a clean environment with only
   the declared runtime dependencies. No model inference was invoked.
+- Non-Windows status reports the Windows-only remesher limitation without
+  probing Windows memory APIs; unsupported generation remains disabled.
 - Python syntax/Pyflakes checks, wheel and source builds, packaged viewer assets,
   skill references, licensing notices, and exclusion of private/generated files.
 - A credential-pattern scan of release source. This is a release hygiene check,

@@ -1,0 +1,12 @@
+include README.md LICENSE NOTICE THIRD_PARTY_NOTICES.md
+include CONTRIBUTING.md SECURITY.md UPSTREAM.md CHANGELOG.md .gitignore .gitattributes
+include Install.cmd Run.cmd install.ps1 .env.example requirements*.txt
+recursive-include scripts *.ps1 *.py
+recursive-include skills *.md *.json *.yaml *.py
+recursive-include docs *.md
+recursive-include assets/branding *.png
+recursive-include tests *.py *.cjs *.ps1
+recursive-include .github *.yml
+recursive-include src/codex_3d_mcp/hunyuan_mv/web *.html *.css *.js *.txt
+prune scripts/__pycache__
+global-exclude *.pyc *.pyo

@@ -1,11 +1,39 @@
-# Contributing
+# Contributing to Cognito-3D-mcp
 
-Thank you for improving Cognito-3D-MCP.
+Use Python 3.11 or 3.12 for development. Install the lightweight development
+dependencies in an isolated environment; GPU runtimes are unnecessary for the
+unit suite:
 
-1. Fork the repository and create a focused branch.
-2. Do not commit model weights, generated meshes, credentials, or local paths.
-3. Run `python -m unittest discover -s tests -v` before opening a pull request.
-4. Explain which backend you tested and whether it used CUDA, MPS, or CPU.
+```sh
+python -m venv .venv
+```
 
-Contributions must comply with the repository's `LICENSE` and `NOTICE`, plus
-the licenses and access terms of any optional backend they integrate.
+Activate the environment (`.venv\Scripts\Activate.ps1` on Windows or
+`source .venv/bin/activate` on Linux), then run:
+
+```sh
+python -m pip install -e . -r requirements-dev.txt build
+python -m pytest
+python -m ruff check --select E9,F src tests scripts
+python scripts/verify-release.py
+python -m build
+```
+
+Real Blender integration tests are skipped
+when Blender is unavailable. GPU smoke checks require a separately installed,
+licensed runtime and should be reported separately from CPU tests.
+
+Open a focused pull request describing the failing behavior, the fix, and the
+checks you ran. Add regression coverage for changes to job state, cancellation,
+input validation, quality gates, resource leases, or HTTP access. Preserve
+serialized GPU execution and explicit approval gates. Do not silently relax a
+gate to make a test pass.
+
+Keep the agent workflows in `skills/` aligned with the MCP API. Existing
+`codex_3d_models*` registration names and `CODEX_*` environment variables remain
+compatibility identifiers; changing them needs a migration plan.
+
+Do not commit credentials, generated models, local reference images, caches,
+environments, job databases, or build output. Third-party materials require their
+original notices. By contributing original code you agree to license that
+contribution under this repository's MIT license.

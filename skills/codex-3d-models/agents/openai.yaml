@@ -1,0 +1,14 @@
+interface:
+  display_name: "Cognito-3D-mcp Single-image 3D"
+  short_description: "Compare legacy single-image 3D backends"
+  default_prompt: "Use $codex-3d-models to compare Stable Fast 3D and SPAR3D on my reference image."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "codex_3d_models"
+      description: "Legacy Stable Fast 3D image-to-GLB server"
+    - type: "mcp"
+      value: "codex_3d_models_spar3d"
+      description: "Legacy SPAR3D image-to-GLB server"
+policy:
+  allow_implicit_invocation: true

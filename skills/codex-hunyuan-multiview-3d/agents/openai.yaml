@@ -1,0 +1,11 @@
+interface:
+  display_name: "Cognito-3D-mcp Multiview 3D"
+  short_description: "Default local image-to-3D with Hunyuan multiview"
+  default_prompt: "Use $codex-hunyuan-multiview-3d to turn my reference images into the best coherent local textured 3D asset."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "codex_3d_models_hunyuan_mv"
+      description: "Primary local Hunyuan3D-2mv generation server"
+policy:
+  allow_implicit_invocation: true

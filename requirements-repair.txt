@@ -1,0 +1,7 @@
+# CPU geometry repair and topology gates used by Hunyuan's repair workflow.
+numpy>=1.26,<3
+scipy>=1.13,<2
+trimesh>=4.4,<6
+pymeshlab==2025.7.post1
+manifold3d>=3.3,<4
+rtree>=1.3,<2
